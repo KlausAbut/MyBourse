@@ -1,11 +1,19 @@
-export type Period = '7d' | '1m' | '1y';
-
-export interface StockPoint {
-    date: string;
-    price: number;
+// Représente un point dans l'historique d'une action
+export interface StockHistoryPoint {
+  date: string;
+  price: number;
+  volume: number;
 }
 
-export interface StockApiResponse {
-    symbol: string;
-    prices: StockPoint[];
+// Représente une action complète renvoyée par l'API
+export interface Stock {
+  symbol: string;
+  name: string;
+  sector: string;
+  currentPrice: number;
+  currency: string;
+  history: StockHistoryPoint[];
 }
+
+// Les périodes possibles dans l'application
+export type Period = "3d" | "5d";

@@ -1,3 +1,4 @@
+// Génère le formulaire principal de l'application
 export function renderStockForm(container: HTMLElement): void {
   container.innerHTML = `
     <section class="app-shell">
@@ -12,27 +13,30 @@ export function renderStockForm(container: HTMLElement): void {
           <div class="field">
             <label for="symbol1">Action 1</label>
             <select id="symbol1">
-              <option value="AAPL">AAPL</option>
-              <option value="TSLA" selected>TSLA</option>
-              <option value="MSFT">MSFT</option>
+              <option value="">Choisir une action</option>
             </select>
           </div>
 
           <div class="field">
             <label for="symbol2">Action 2</label>
             <select id="symbol2">
-              <option value="GOOGL">GOOGL</option>
-              <option value="NVDA" selected>NVDA</option>
-              <option value="META">META</option>
+              <option value="">Choisir une action</option>
             </select>
           </div>
 
           <div class="field">
             <label for="period">Période</label>
             <select id="period">
-              <option value="7d" selected>7 jours</option>
-              <option value="1m">1 mois</option>
-              <option value="1y">1 an</option>
+              <option value="3d">3 derniers jours</option>
+              <option value="5d" selected>5 derniers jours</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="chartType">Type de graphique</label>
+            <select id="chartType">
+              <option value="line" selected>Ligne</option>
+              <option value="bar">Barres</option>
             </select>
           </div>
         </div>
@@ -48,6 +52,10 @@ export function renderStockForm(container: HTMLElement): void {
             <h2>Prêt à comparer</h2>
             <p>Sélectionne deux actions et clique sur “Charger les données”.</p>
           </div>
+        </div>
+
+        <div class="chart-card">
+          <canvas id="stockChart"></canvas>
         </div>
       </div>
     </section>

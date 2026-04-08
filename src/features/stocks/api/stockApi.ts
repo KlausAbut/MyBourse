@@ -1,48 +1,62 @@
-import type { Period, StockApiResponse } from '../models/stock.types';
+import { API_BASE_URL } from "../../../shared/config/env";
+import { AppError } from "../../../shared/errors/AppError";
+import type { Stock } from "../models/stock.types";
 
-export async function fetchStockHistory(
-    symbol: string,
-    period: Period,
-): Promise<StockApiResponse> {
-    await new Promise ((resolve) => setTimeout(resolve, 800));
+// Vérifie qu'un point d'historique est valide
+function isStockHistoryPoint(value: unknown): boolean {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
 
-    const totalPoints = getTotalPoints(period);
+  const point = value as Record<string, unknown>;
 
-    const prices = Array.from({ length: totalPoints }, (_, index) => ({
-        date: `Jour ${index + 1}`,
-        price: generateFakePrice(symbol, index)
-    }));
-
-    return {
-        symbol,
-        prices    
-    };
+  return (
+    typeof point.date === "string" &&
+    typeof point.price === "number" &&
+    typeof point.volume === "number"
+  );
 }
 
-function getTotalPoints(period: Period): number {
-    switch (period) {
-        case '7d':
-            return 7;
-        case '1m':
-            return 30;
-        case '1y':
-            return 12;
-        default:
-            return 7;
-    }
+// Vérifie qu'une action est valide
+function isStock(value: unknown): value is Stock {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const stock = value as Record<string, unknown>;
+
+  return (
+    typeof stock.symbol === "string" &&
+    typeof stock.name === "string" &&
+    typeof stock.sector === "string" &&
+    typeof stock.currentPrice === "number" &&
+    typeof stock.currency === "string" &&
+    Array.isArray(stock.history) &&
+    stock.history.every(isStockHistoryPoint)
+  );
 }
 
-function generateFakePrice(symbol: string, index: number): number {
-    const basePrices: Record<string, number> = {
-        AAPL: 180,
-        TSLA: 210,
-        MSFT: 420,
-        GOOGL: 140,
-        NVDA: 850,
-        META: 470
-    };
-    const base = basePrices[symbol] ?? 100;
-    const variation = Math.round((Math.random() - 0.5) * 20);
+// Récupère toutes les actions
+export async function fetchStocks(): Promise<Stock[]> {
+  let response: Response;
 
-    return base + index * 2 + variation;
+  try {
+    response = await fetch(API_BASE_URL);
+  } catch {
+    throw new AppError("Impossible de contacter l'API.");
+  }
+
+  if (!response.ok) {
+    throw new AppError(
+      `Erreur API : ${response.status} ${response.statusText}`,
+    );
+  }
+
+  const data: unknown = await response.json();
+
+  if (!Array.isArray(data) || !data.every(isStock)) {
+    throw new AppError("Les données reçues sont invalides.");
+  }
+
+  return data;
 }

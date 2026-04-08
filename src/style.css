@@ -9,11 +9,10 @@
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -45,8 +44,7 @@
     --accent-border: rgba(192, 132, 252, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
     --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
-      rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   }
 }
 
@@ -138,7 +136,7 @@ select {
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-bottom: 20px;
 }
@@ -224,13 +222,24 @@ select {
   padding: 16px;
 }
 
-.stock-block ul {
-  margin: 12px 0 0;
-  padding-left: 18px;
+.chart-card {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  background: rgba(244, 243, 236, 0.35);
+  min-height: 380px;
 }
 
-.stock-block li {
-  margin-bottom: 6px;
+@media (prefers-color-scheme: dark) {
+  .chart-card {
+    background: rgba(31, 32, 40, 0.6);
+  }
+}
+
+.chart-card canvas {
+  width: 100% !important;
+  height: 320px !important;
 }
 
 @media (max-width: 900px) {

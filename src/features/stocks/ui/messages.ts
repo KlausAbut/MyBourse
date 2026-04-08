@@ -1,11 +1,14 @@
+// Affiche un message d'information ou d'erreur à l'utilisateur
 export function showMessage(
-    text: string,
-    type: 'info' | 'error' = 'info'
+  text: string,
+  type: "info" | "error" = "info",
 ): void {
-    const el = document.querySelector<HTMLParagraphElement>('#message');
+  const el = document.querySelector<HTMLParagraphElement>("#message");
 
-    if (!el) return; 
+  if (!el) {
+    return;
+  }
 
-    el.textContent = text;
-    el.className = `message ${type}`;
+  el.textContent = text;
+  el.className = `message ${type}`;
 }
