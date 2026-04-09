@@ -27,8 +27,11 @@ export function renderStockForm(container: HTMLElement): void {
           <div class="field">
             <label for="period">Période</label>
             <select id="period">
-              <option value="3d">3 derniers jours</option>
-              <option value="5d" selected>5 derniers jours</option>
+              <option value="7d">7 derniers jours</option>
+              <option value="1m" selected>1 mois</option>
+              <option value="3m">3 mois</option>
+              <option value="6m">6 mois</option>
+              <option value="all">Toute la période</option>
             </select>
           </div>
 

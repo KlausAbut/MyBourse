@@ -1,28 +1,49 @@
 import Chart from "chart.js/auto";
 import type { ChartType } from "chart.js";
-import type { Period, Stock } from "../models/stock.types";
+import type { Period, Stock, StockHistoryPoint } from "../models/stock.types";
 
 // Instance actuelle du graphique
 let chartInstance: Chart | null = null;
 
 // Convertit la période choisie en nombre de jours
-function getDaysFromPeriod(period: Period): number {
+function getDaysFromPeriod(period: Period): number | null {
   switch (period) {
-    case "3d":
-      return 3;
-    case "5d":
-      return 5;
+    case "7d":
+      return 7;
+    case "1m":
+      return 30;
+    case "3m":
+      return 90;
+    case "6m":
+      return 180;
+    case "all":
+      return null;
   }
 }
 
-// Récupère les labels du graphique à partir des dates
-function buildLabels(stock: Stock, days: number): string[] {
-  return stock.history.slice(-days).map((point) => point.date);
+// Retourne l'historique filtré selon la période choisie
+function getFilteredHistory(
+  history: StockHistoryPoint[],
+  period: Period,
+): StockHistoryPoint[] {
+  const days = getDaysFromPeriod(period);
+
+  if (days === null) {
+    return history;
+  }
+
+  return history.slice(-days);
 }
 
-// Récupère les prix d'une action sur la période choisie
-function buildPrices(stock: Stock, days: number): number[] {
-  return stock.history.slice(-days).map((point) => point.price);
+// Formate une date pour l'affichage sur le graphique
+function formatDateLabel(date: string): string {
+  const parsedDate = new Date(date);
+
+  return parsedDate.toLocaleDateString("fr-FR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  });
 }
 
 // Supprime le graphique actuel s'il existe
@@ -41,24 +62,25 @@ export function renderStockChart(
   period: Period,
   chartType: ChartType,
 ): void {
-  const days = getDaysFromPeriod(period);
+  const filteredHistoryA = getFilteredHistory(stockA.history, period);
+  const filteredHistoryB = getFilteredHistory(stockB.history, period);
 
   clearStockChart();
 
   chartInstance = new Chart(canvas, {
     type: chartType,
     data: {
-      labels: buildLabels(stockA, days),
+      labels: filteredHistoryA.map((point) => formatDateLabel(point.date)),
       datasets: [
         {
           label: `${stockA.symbol} - ${stockA.name}`,
-          data: buildPrices(stockA, days),
+          data: filteredHistoryA.map((point) => point.price),
           borderWidth: 2,
           tension: 0.25,
         },
         {
           label: `${stockB.symbol} - ${stockB.name}`,
-          data: buildPrices(stockB, days),
+          data: filteredHistoryB.map((point) => point.price),
           borderWidth: 2,
           tension: 0.25,
         },

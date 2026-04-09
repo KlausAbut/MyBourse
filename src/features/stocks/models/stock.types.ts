@@ -15,5 +15,5 @@ export interface Stock {
   history: StockHistoryPoint[];
 }
 
-// Les périodes possibles dans l'application
-export type Period = "3d" | "5d";
+// Périodes disponibles dans l'application
+export type Period = "7d" | "1m" | "3m" | "6m" | "all";
