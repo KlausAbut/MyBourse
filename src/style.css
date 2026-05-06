@@ -297,82 +297,219 @@ select:hover {
   padding: 8px 12px;
 }
 
+/* ── Badges ─────────────────────────────────────────────── */
+
+.change-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.badge--up   { color: var(--green); background: var(--green-bg); }
+.badge--down { color: var(--red);   background: var(--red-bg); }
+
 /* ── Result cards ───────────────────────────────────────── */
 
 .result-card {
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 24px;
+  padding: 20px;
   background: var(--bg-2);
 }
 
 .empty-state {
   text-align: center;
-  padding: 24px 0;
+  padding: 32px 0;
   color: var(--text-dim);
 }
+
+.empty-icon { font-size: 32px; margin-bottom: 12px; }
 
 .empty-state h2 {
   color: var(--text);
   margin-bottom: 6px;
+  font-size: 16px;
 }
+
+.empty-state p { font-size: 13px; }
 
 .result-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 14px;
 }
+
+/* ── Stock block ─────────────────────────────────────────── */
 
 .stock-block {
   border: 1px solid var(--border-2);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 18px 20px;
   background: var(--bg-3);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .stock-block::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
   background: linear-gradient(180deg, var(--accent), transparent);
 }
 
-.stock-block h2 {
-  font-size: 22px;
+.stock-block__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.stock-symbol {
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.5px;
-  margin-bottom: 10px;
   color: var(--text-h);
+  margin-bottom: 2px !important;
 }
 
-.stock-block p {
-  font-size: 13px;
-  color: var(--text);
-  margin-bottom: 4px;
+.stock-name {
+  font-size: 12px;
+  color: var(--text-dim);
 }
 
-.stock-block p strong {
+.stock-price {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--text-h);
+  line-height: 1;
+}
+
+.stock-currency {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-dim);
+  letter-spacing: 0;
+}
+
+.stock-meta { display: flex; gap: 8px; }
+
+.sector-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--accent-bg);
+  color: var(--accent-2);
+  border: 1px solid var(--accent-border);
+  letter-spacing: 0.02em;
+}
+
+.stock-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--text-dim);
   font-weight: 500;
 }
 
+.stat-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat--up   { color: var(--green); }
+.stat--down { color: var(--red); }
+
 /* ── Chart ──────────────────────────────────────────────── */
 
 .chart-card {
-  margin-top: 20px;
+  margin-top: 16px;
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 24px 20px 20px;
+  padding: 20px;
   background: var(--bg-2);
-  min-height: 380px;
+  min-height: 420px;
   position: relative;
-  /* subtle inner glow at top to match gradient fills */
   box-shadow: inset 0 1px 0 rgba(139,92,246,0.08);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.chart-header:empty { display: none; }
+
+.chart-header__chips {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.chart-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chart-chip__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chart-chip strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-h);
+  letter-spacing: 0.02em;
+}
+
+.chart-chip__price {
+  font-size: 13px;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-period-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  font-weight: 500;
 }
 
 .chart-card canvas {

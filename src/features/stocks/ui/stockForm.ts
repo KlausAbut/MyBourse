@@ -73,6 +73,7 @@ export function renderStockForm(container: HTMLElement): void {
 
         <!-- Graphique -->
         <div class="chart-card">
+          <div id="chartHeader" class="chart-header"></div>
           <canvas id="stockChart"></canvas>
         </div>
 
