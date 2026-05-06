@@ -16,37 +16,37 @@ export function renderStockForm(container: HTMLElement): void {
 
           <!-- Action 1 -->
           <div class="field">
-            <label for="symbol1">📈 Action 1</label>
+            <label for="symbol1">Action 1</label>
             <select id="symbol1">
-              <option value="">Choisir une action</option>
+              <option value="">Sélectionner</option>
             </select>
           </div>
 
           <!-- Action 2 -->
           <div class="field">
-            <label for="symbol2">📉 Action 2</label>
+            <label for="symbol2">Action 2</label>
             <select id="symbol2">
-              <option value="">Choisir une action</option>
+              <option value="">Sélectionner</option>
             </select>
           </div>
 
           <!-- Période -->
           <div class="field">
-            <label for="period">Période d'analyse</label>
+            <label for="period">Période</label>
             <select id="period">
               <option value="7d">7 jours</option>
               <option value="1m" selected>1 mois</option>
               <option value="3m">3 mois</option>
               <option value="6m">6 mois</option>
-              <option value="all">Depuis le début</option>
+              <option value="all">Tout</option>
             </select>
           </div>
 
           <!-- Type de graphique -->
           <div class="field">
-            <label for="chartType">Type de graphique</label>
+            <label for="chartType">Graphique</label>
             <select id="chartType">
-              <option value="line" selected>Ligne</option>
+              <option value="line" selected>Courbe</option>
               <option value="bar">Barres</option>
             </select>
           </div>
@@ -55,7 +55,7 @@ export function renderStockForm(container: HTMLElement): void {
 
         <!-- Bouton -->
         <button id="loadBtn" type="button" class="primary-btn">
-          Comparer les actions
+          Comparer les actions →
         </button>
 
         <!-- Message -->

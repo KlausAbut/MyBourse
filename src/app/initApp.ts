@@ -7,6 +7,7 @@ import {
 import type { Period, Stock } from "../features/stocks/models/stock.types";
 import { showMessage } from "../features/stocks/ui/messages";
 import { renderStockForm } from "../features/stocks/ui/stockForm";
+import { renderTicker } from "../features/ticker/stockTicker";
 
 // Recherche une action selon son symbole
 function findStockBySymbol(stocks: Stock[], symbol: string): Stock | undefined {
@@ -96,6 +97,7 @@ export async function initApp(): Promise<void> {
   showMessage("Chargement des actions...", "info");
 
   const stocks = await fetchStocks();
+  renderTicker(app, stocks);
   populateStockSelects(stocks);
 
   showMessage("Sélectionnez deux actions puis chargez les données.", "info");
