@@ -367,15 +367,17 @@ select:hover {
   margin-top: 20px;
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 28px;
+  padding: 24px 20px 20px;
   background: var(--bg-2);
   min-height: 380px;
   position: relative;
+  /* subtle inner glow at top to match gradient fills */
+  box-shadow: inset 0 1px 0 rgba(139,92,246,0.08);
 }
 
 .chart-card canvas {
   width: 100% !important;
-  height: 320px !important;
+  height: 340px !important;
 }
 
 /* ── Responsive ─────────────────────────────────────────── */
