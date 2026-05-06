@@ -40,6 +40,41 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Light theme override ───────────────────────────────── */
+
+[data-theme="light"] {
+  --bg:          #fafafa;
+  --bg-2:        #f3f3f8;
+  --bg-3:        #ebebf3;
+  --border:      #e2e1e9;
+  --border-2:    #d2d0de;
+
+  --text:        #6b6880;
+  --text-h:      #0d0c14;
+  --text-dim:    #a09db0;
+
+  --accent:      #7c3aed;
+  --accent-2:    #8b5cf6;
+  --accent-glow: rgba(124, 58, 237, 0.18);
+  --accent-bg:   rgba(124, 58, 237, 0.07);
+  --accent-border: rgba(124, 58, 237, 0.25);
+
+  --green:       #059669;
+  --green-bg:    rgba(5, 150, 105, 0.1);
+  --red:         #dc2626;
+  --red-bg:      rgba(220, 38, 38, 0.1);
+
+  --shadow-sm:   0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md:   0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 32px var(--accent-glow);
+
+  color-scheme: light;
+}
+
+[data-theme="light"] body        { background: var(--bg); }
+[data-theme="light"] .ticker-bar { background: #1a1a2e; }
+[data-theme="light"] select      { background: var(--bg-2); }
+
 * { box-sizing: border-box; }
 
 body {
@@ -515,6 +550,37 @@ select:hover {
 .chart-card canvas {
   width: 100% !important;
   height: 340px !important;
+}
+
+/* ── Theme toggle button ────────────────────────────────── */
+
+.theme-toggle {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border-2);
+  background: var(--bg-2);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-glow);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
 }
 
 /* ── Responsive ─────────────────────────────────────────── */

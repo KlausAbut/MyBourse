@@ -8,6 +8,7 @@ import type { Period, Stock, StockHistoryPoint } from "../features/stocks/models
 import { showMessage } from "../features/stocks/ui/messages";
 import { renderStockForm } from "../features/stocks/ui/stockForm";
 import { renderTicker } from "../features/ticker/stockTicker";
+import { initTheme } from "../features/theme/themeToggle";
 
 // ── Helpers ──────────────────────────────────────────────
 
@@ -196,6 +197,7 @@ export async function initApp(): Promise<void> {
   const app = document.querySelector("#app");
   if (!(app instanceof HTMLDivElement)) throw new Error("App introuvable.");
 
+  initTheme();
   renderStockForm(app);
   showMessage("Chargement des données...", "info");
 
